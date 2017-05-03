@@ -20,7 +20,6 @@ var AvailableShift = mongoose.model("AvailableShift", {
     type: String,
     ref: "Waiter"
   },
-  week: Number,
   Monday: Boolean,
   Tuesday: Boolean,
   Wednesday: Boolean,
@@ -171,7 +170,14 @@ function createShift(waiter) {
       Friday: false,
       Saturday: false,
       Sunday: false
-    });
+    }).then(function(shift){
+        waiter._shift = shift._id;
+        return waiter
+          .save()
+          .then(function(){
+            return shift;
+          });
+    })
 };
 
 //after executing the following function, we know that we have a waiter that is
@@ -203,113 +209,44 @@ function waiterWithShift(waiterName) {
           })
       } else {
         //otherwise a waiter does exist and he does have a shift
-        return Waiter;
+        return waiter;
       }
     });
 };
 
-function updateShift(waiterPromise, shiftData) {
-  //loop through daysAvailable
-  for (let i = 0; i < shiftData.length; i++) {
-    let chosenDay = shiftData[i];
-    //invoke the waiterPromise which allows us access to the waiterDocument
-    waiterPromise
-      .then(function(waiterDoc){
-        //loop through the waiter document's _shift key, which is mapped to
-        //an object that contains the days of the week
-        for(currentKey in waiterDoc._shift){
-          //find all the keys that with day, for those are the days of the week
-          //that we will need to update
-          if(currentKey.endsWith("day")){
-            if(currentKey === chosenDay){
-              waiterDoc._shift
-                .update(
-                  {name: waiterDoc.name},
-                  {
-                    currentKey: true
-                  },
-                  function(err){
-                    if(err){
-                      console.log("Error updating " + currentKey + " to true.");
-                    }
-                  }
-                )
-            } else {
-              waiterDoc._shift
-                .update(
-                  {name: waiterDoc.name},
-                  {
-                    currentKey: false
-                  },
-                  function(err){
-                    if(err){
-                      console.log("Error updating " + currentKey + " to false.");
-                    }
-                  }
-                )
-            };
-          }
-        }
-      })
-      .catch(function(err){
-        if(err){
-          console.log(err);
-        }
-      });
-  };
-};
+function updateShift(waiter, shiftData) {
+  var currentShift = waiter._shift;
+  console.log(currentShift);
 
+  // var test = Object
+  //   .keys(currentShift.paths)
 
-// function oldStuff() {
-//
-//   return AvailableShift
-//     .findOne({
-//       name: waiterName
-//     })
-//     .then(function(currentShift) {
-//         //if there are no entries in AvailableShift collection
-//         //then find the waiterName in the Waiter collection
-//         if (!currentShift) {
-//           return Waiter
-//             .findOne({
-//               name: waiterName
-//             })
-//             .then(function(currentWaiter) {
-//               //store the current doc in "currentWaiter"
-//
-//               return AvailableShift.create({
-//                   _waiter_id: currentWaiter._id,
-//                   Monday: false,
-//                   Tuesday: false,
-//                   Wednesday: false,
-//                   Thursday: false,
-//                   Friday: false,
-//                   Saturday: false,
-//                   Sunday: false
-//                 })
-//                 .then(function(shift) {
-//                   // you have Shift and a Waiter...
-//                   return {
-//                     shift,
-//                     waiter
-//                   }
-//                 })
-//                 .catch(function(err) {
-//                   console.log(err);
-//                 });
-//             })
-//
-//           //create a new shift doc with a ref to the Waiter coll
-//           //save the new shift
-//         } else {
-//           return {
-//             shift: currentShift,
-//
-//           }
-//         }
-//
-//       }
+    // console.log(test);
 
+  //find al lthe weekday fields
+  var weekDayFields = Object
+    .keys(currentShift.toJSON())
+    .filter((field) => field.endsWith('day'))
+
+  //look at each day in weekDayFields
+  weekDayFields.forEach((weekDay) => {
+    //look in shiftData to find which days were checked
+    let shiftForWeekDay = shiftData.find((day) => day === weekDay);
+    console.log(shiftForWeekDay);
+    //if shiftForWeekDay has a value, workOnThisDay will be true, if not, it will be
+    //false
+    var workOnThisDay = false;
+    if (shiftForWeekDay){
+      workOnThisDay = true;
+    }
+    //since we have the boolean stored in workOnThisDay, we can set each weekDay
+    //at currentShift to the value stored in workOnThisDay
+    currentShift[weekDay] = workOnThisDay; //shiftForWeekDay ? true : false;
+
+  });
+
+  return currentShift.save();
+}
 
       app.post("/waiters/:username", function(req, res) {
           var waiterName = req.params.username;
@@ -324,11 +261,64 @@ function updateShift(waiterPromise, shiftData) {
           };
           //if at least one day was checked
           if (daysAvailable.length > 0) {
-            var waiterWithShiftPromise = waiterWithShift(waiterName);
-            updateShift(waiterWithShiftPromise, daysAvailable);
+
+              waiterWithShift(waiterName)
+              .then(function(waiterWithShift){
+                updateShift(waiterWithShift, daysAvailable);
+                res.render("home");
+              });
+          } else {
+            res.render("home", {error: "No days were checked."})
           }
-          res.render("home");
       });
+
+app.get("/days", function(req, res){
+
+  var output = {
+    Monday    : [],
+    Tuesday   : [],
+    Wednesday : [],
+    Thursday  : [],
+    Friday    : [],
+    Saturday  : [],
+    Sunday    : []
+  };
+
+  //query for all waiters
+  Waiter
+    .find({})
+    .populate("_shift")
+    //find({}), returns an array of all waiter objects
+    .then(function(myCursor){
+      //loop through each object that represents a waiter, and populate his/her shift
+
+      myCursor.forEach((currentWaiterDoc) => {
+        console.log(currentWaiterDoc);
+        currentWaiterDoc
+          .then(function(populatedWaiter) {
+
+            console.log(populatedWaiter);
+            let currentWaiterName = populatedWaiter.name;
+            let currentWaiterShift = populatedWaiter._shift.toJSON();
+            //find all days that are true
+            for(let key in currentWaiterShift){
+              if(key.endsWith("day")){
+                //if the current day is set to true
+                if(currentWaiterShift[key] === true){
+                  //push the waiter's name to the output objlist where the key in waiter shift is
+                  //the same as the key in the output
+                  output[key].push(currentWaiterName);
+                }
+
+              }
+            };
+
+          })
+      })
+      //once populated
+    })
+    res.render("days", output);
+});
 
 app.listen(app.get("port"), function() {
   console.log("The frontend server is running on port 5000!");
