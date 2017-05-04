@@ -1,0 +1,52 @@
+body {
+  background-color: #1f1f14;
+  color: white;
+  font-family: 'Dosis', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+table, th, tr, td {
+  padding: 1em;
+  border-collapse: collapse;
+}
+
+th {
+  font-size: 1.8em;
+}
+
+td {
+  border-right: solid thin white;
+  border-left: solid thin white;
+}
+
+#daysTable {
+  margin: 0em 0em 0em 9em;
+}
+
+#daysCheckboxTable {
+  margin: 0em 0em 0em 5em;
+}
+
+.checkboxCell:hover {
+  background-color: #adad85;
+}
+
+h1 {
+  background-color: #00ace6;
+  padding: 1em 1em 1em 1em;
+  margin: 0;
+}
+
+.underSubscribed {
+  background-color: #ff9900;
+}
+
+.overSubscribed {
+  background-color: #ff5c33;
+}
+
+.sufficient {
+  background-color: #47d147;
+}

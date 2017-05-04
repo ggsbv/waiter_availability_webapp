@@ -1,17 +1,19 @@
-<table id="daysTable">
+  <h1>On which days are you available to work?</h1>
+
   <form id="daysWorkingForm" action="" method="post">
+    <table id="daysCheckboxTable">
     <thead>
       <tr>
-        <th class="underbooked"><label><input type="checkbox" name="dayCheck" value="Monday">Monday</label></th>
-        <th class="underbooked"><label><input type="checkbox" name="dayCheck" value="Tuesday">Tuesday</label></th>
-        <th class="underbooked"><label><input type="checkbox" name="dayCheck" value="Wednesday">Wednesday</label></th>
-        <th class="underbooked"><label><input type="checkbox" name="dayCheck" value="Thursday">Thursday</label></th>
-        <th class="underbooked"><label><input type="checkbox" name="dayCheck" value="Friday">Friday</label></th>
-        <th class="underbooked"><label><input type="checkbox" name="dayCheck" value="Saturday">Saturday</label></th>
-        <th class="underbooked"><label><input type="checkbox" name="dayCheck" value="Sunday">Sunday</label></th>
+        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Monday">Monday</label></th>
+        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Tuesday">Tuesday</label></th>
+        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Wednesday">Wednesday</label></th>
+        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Thursday">Thursday</label></th>
+        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Friday">Friday</label></th>
+        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Saturday">Saturday</label></th>
+        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Sunday">Sunday</label></th>
       </tr>
     </thead>
+  </table>
     <input type="submit" name="submitDaysWorking" value="Submit">
   </form>
   <p>{{error}}</p>
-</table>

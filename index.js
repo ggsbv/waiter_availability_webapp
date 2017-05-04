@@ -60,6 +60,8 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(bodyParser.json());
+
+//configure express-static
 app.use(serve("public"));
 
 //home/login page
@@ -248,6 +250,46 @@ function updateShift(waiter, shiftData) {
   return currentShift.save();
 }
 
+function waitersAvailableForEachDay(waiterCollection){
+  var output = {
+      Monday    : {waiters : []},
+      Tuesday   : {waiters : []},
+      Wednesday : {waiters : []},
+      Thursday  : {waiters : []},
+      Friday    : {waiters : []},
+      Saturday  : {waiters : []},
+      Sunday    : {waiters : []}
+  };
+
+  //query for all waiters
+  return waiterCollection
+    .find({})
+    .populate("_shift")
+    //find({}), returns an array of all waiter objects
+    .then(function(myCursor){
+      //loop through each object that represents a waiter, and populate his/her shift
+
+      myCursor.forEach((currentWaiterDoc) => {
+        let currentWaiterName = currentWaiterDoc.name;
+        let currentWaiterShift = currentWaiterDoc._shift.toJSON();
+        //find all days that are true
+        for(let key in currentWaiterShift){
+          if(key.endsWith("day")){
+            let day = key;
+            //if the current day is set to true
+            if(currentWaiterShift[day] === true){
+              //push the waiter's name to the output objlist where the key in waiter shift is
+              //the same as the key in the output
+              output[day].waiters.push(currentWaiterName);
+              console.log(output[day].waiters.length);
+            }
+          }
+        };
+      })
+      return output;
+    })
+};
+
       app.post("/waiters/:username", function(req, res) {
           var waiterName = req.params.username;
           var wasChecked = req.body.dayCheck;
@@ -273,51 +315,33 @@ function updateShift(waiter, shiftData) {
       });
 
 app.get("/days", function(req, res){
+  var outputPromise = waitersAvailableForEachDay(Waiter);
 
-  var output = {
-    Monday    : [],
-    Tuesday   : [],
-    Wednesday : [],
-    Thursday  : [],
-    Friday    : [],
-    Saturday  : [],
-    Sunday    : []
-  };
+  outputPromise
+    .then((output) => {
+      for(let weekday in output){
+        let currentDayDetails = output[weekday];
+        //console.log(currentDayDetails);
+        let waiterListForDay = currentDayDetails.waiters;
 
-  //query for all waiters
-  Waiter
-    .find({})
-    .populate("_shift")
-    //find({}), returns an array of all waiter objects
-    .then(function(myCursor){
-      //loop through each object that represents a waiter, and populate his/her shift
-
-      myCursor.forEach((currentWaiterDoc) => {
-        console.log(currentWaiterDoc);
-        currentWaiterDoc
-          .then(function(populatedWaiter) {
-
-            console.log(populatedWaiter);
-            let currentWaiterName = populatedWaiter.name;
-            let currentWaiterShift = populatedWaiter._shift.toJSON();
-            //find all days that are true
-            for(let key in currentWaiterShift){
-              if(key.endsWith("day")){
-                //if the current day is set to true
-                if(currentWaiterShift[key] === true){
-                  //push the waiter's name to the output objlist where the key in waiter shift is
-                  //the same as the key in the output
-                  output[key].push(currentWaiterName);
-                }
-
-              }
-            };
-
-          })
-      })
-      //once populated
+        if(waiterListForDay.length < 3){
+          currentDayDetails["status"] = "underSubscribed";
+        } else if(waiterListForDay.length > 3) {
+          currentDayDetails["status"] = "overSubscribed"; // colour : red
+        } else {
+          currentDayDetails["status"] = "sufficient"; // colour : green
+        };
+      };
+      console.log(output);
+      res.render("days", output);
     })
-    res.render("days", output);
+  /***
+  [
+    {day: 'Monday', waiters : [], status : 'under'}
+
+  ]
+
+  */
 });
 
 app.listen(app.get("port"), function() {

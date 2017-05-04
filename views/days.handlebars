@@ -1,49 +1,49 @@
-<table>
+<table id="daysTable">
   <thead>
-      <tr>
-        <th class="under">Monday</th>
-        <th class="under">Tuesday</th>
-        <th class="under">Wednesday</th>
-        <th class="under">Thursday</th>
-        <th class="under">Friday</th>
-        <th class="under">Saturday</th>
-        <th class="under">Sunday</th>
+      <tr class="daysOfTheWeek">
+        <th class="{{Monday.status}}">Monday</th>
+        <th class="{{Tuesday.status}}">Tuesday</th>
+        <th class="{{Wednesday.status}}">Wednesday</th>
+        <th class="{{Thursday.status}}">Thursday</th>
+        <th class="{{Friday.status}}">Friday</th>
+        <th class="{{Saturday.status}}">Saturday</th>
+        <th class="{{Sunday.status}}">Sunday</th>
       </tr>
   </thead>
   <tbody>
       <tr>
         <td>
-        {{#each Monday}}
+        {{#each Monday.waiters}}
         <li>{{this}}</li>
         {{/each}}
         </td>
         <td>
-        {{#each Tuesday}}
+        {{#each Tuesday.waiters}}
         <li>{{this}}</li>
         {{/each}}
         </td>
         <td>
-        {{#each Wednesday}}
+        {{#each Wednesday.waiters}}
         <li>{{this}}</li>
         {{/each}}
         </td>
         <td>
-        {{#each Thursday}}
+        {{#each Thursday.waiters}}
         <li>{{this}}</li>
         {{/each}}
         </td>
         <td>
-        {{#each Friday}}
+        {{#each Friday.waiters}}
         <li>{{this}}</li>
         {{/each}}
         </td>
         <td>
-        {{#each Saturday}}
+        {{#each Saturday.waiters}}
         <li>{{this}}</li>
         {{/each}}
         </td>
         <td>
-        {{#each Sunday}}
+        {{#each Sunday.waiters}}
         <li>{{this}}</li>
         {{/each}}
         </td>
