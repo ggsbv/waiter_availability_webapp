@@ -1,11 +1,14 @@
 <div id="registrationDiv">
+  <h1>Waiter Availability Webapp</h1>
   <form id="registrationForm" action="/registration" method="post">
-    <input type="text" name="usernameRegistration">
-    <input type="text" name="passwordRegistration">
-    <input type="submit" name="submitRegistration" value="Register">
+    <div class="usernameAndPassword">
+      <div class="usernameInput"><p>Username:</p><input class="textInput unInputBox" type="text" name="usernameRegistration"></div>
+      <div class="passwordInput"><p>Password:</p><input class="textInput pwInputBox" type="text" name="passwordRegistration"></div>
+    </div>
+    <input class="buttonStyle" id="regPageRegButton" type="submit" name="submitRegistration" value="Register">
   </form>
 
   <p>{{output}}</p>
 
-  <p><a href="/">Login</a></p>
+  <p><a href="/">Back to Login Page</a></p>
 </div>

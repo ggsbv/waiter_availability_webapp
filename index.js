@@ -47,7 +47,7 @@ db.once('open', function() {
 });
 
 //configure port env
-app.set("port", (process.env.PORT || 5000));
+app.set("port", (process.env.PORT || 5001));
 
 //set express handlebars as view engine
 app.engine("handlebars", expressHandlebars({
@@ -72,9 +72,13 @@ app.get("/", function(req, res) {
 app.post("/login", function(req, res) {
   var username = req.body.usernameInput;
   var password = req.body.passwordInput;
+  var registerButton = req.body.registerButton1;
   var data = "";
-  //find the document that has a name similar to the input name
-  Waiter
+  if(registerButton){
+    res.redirect("/registration");
+  } else {
+    //find the document that has a name similar to the input name
+    Waiter
     .findOne({
       name: username
     })
@@ -91,7 +95,11 @@ app.post("/login", function(req, res) {
           };
           res.render("login", data);
         } else {
-          res.redirect("/waiters/" + username);
+          if(username !== "admin"){
+            res.redirect("/waiters/" + username);
+          } else {
+            res.redirect("/days");
+          }
         };
       };
     })
@@ -101,6 +109,8 @@ app.post("/login", function(req, res) {
       };
       res.render("login", data);
     });
+    }
+
 });
 
 app.get("/registration", function(req, res) {
@@ -218,7 +228,6 @@ function waiterWithShift(waiterName) {
 
 function updateShift(waiter, shiftData) {
   var currentShift = waiter._shift;
-  console.log(currentShift);
 
   // var test = Object
   //   .keys(currentShift.paths)
@@ -234,7 +243,6 @@ function updateShift(waiter, shiftData) {
   weekDayFields.forEach((weekDay) => {
     //look in shiftData to find which days were checked
     let shiftForWeekDay = shiftData.find((day) => day === weekDay);
-    console.log(shiftForWeekDay);
     //if shiftForWeekDay has a value, workOnThisDay will be true, if not, it will be
     //false
     var workOnThisDay = false;
@@ -268,10 +276,14 @@ function waitersAvailableForEachDay(waiterCollection){
     //find({}), returns an array of all waiter objects
     .then(function(myCursor){
       //loop through each object that represents a waiter, and populate his/her shift
-
       myCursor.forEach((currentWaiterDoc) => {
         let currentWaiterName = currentWaiterDoc.name;
-        let currentWaiterShift = currentWaiterDoc._shift.toJSON();
+        let currentWaiterShift = {};
+
+        if(currentWaiterDoc._shift){
+          currentWaiterShift = currentWaiterDoc._shift.toJSON();
+        };
+
         //find all days that are true
         for(let key in currentWaiterShift){
           if(key.endsWith("day")){
@@ -281,7 +293,6 @@ function waitersAvailableForEachDay(waiterCollection){
               //push the waiter's name to the output objlist where the key in waiter shift is
               //the same as the key in the output
               output[day].waiters.push(currentWaiterName);
-              console.log(output[day].waiters.length);
             }
           }
         };
@@ -321,7 +332,6 @@ app.get("/days", function(req, res){
     .then((output) => {
       for(let weekday in output){
         let currentDayDetails = output[weekday];
-        //console.log(currentDayDetails);
         let waiterListForDay = currentDayDetails.waiters;
 
         if(waiterListForDay.length < 3){
@@ -332,7 +342,6 @@ app.get("/days", function(req, res){
           currentDayDetails["status"] = "sufficient"; // colour : green
         };
       };
-      console.log(output);
       res.render("days", output);
     })
   /***
@@ -345,5 +354,5 @@ app.get("/days", function(req, res){
 });
 
 app.listen(app.get("port"), function() {
-  console.log("The frontend server is running on port 5000!");
+  console.log("The frontend server is running on port 5001!");
 });

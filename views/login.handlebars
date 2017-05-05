@@ -1,10 +1,14 @@
 <div id="loginDiv">
-  <h1>User Log In</h1>
+  <h1>Waiter Availability Webapp</h1>
   <form id="loginForm" action="/login" method="post">
-    <input id="usernameInput" type="text" name="usernameInput">
-    <input id="passwordInput" type="text" name="passwordInput">
-    <input id="loginButton" type="submit" name="loginSubmit" value="Log In">
+    <div class="usernameAndPassword">
+      <div class="usernameInput"> <p>Username:</p> <input class="textInput unInputBox" type="text" name="usernameInput"> </div>
+      <div class="passwordInput"> <p>Password:</p> <input class="textInput pwInputBox" type="text" name="passwordInput"> </div>
+    </div>
+    <div id="regAndLoginButtons">
+      <input class="buttonStyle" id="loginButton" type="submit" name="loginSubmit" value="Log In">
+      <input class="buttonStyle" id="registerButton" type="submit" name="registerButton1" value="Register">
+    </div>
   </form>
   <p>{{output}}</p>
-  <p><a href="/registration">Register</a></p>
 </div>
