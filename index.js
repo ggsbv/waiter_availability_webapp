@@ -164,9 +164,26 @@ app.get("/waiters/:username", function(req, res) {
   //should change yellow if there are less than 3 people listed, green if there
   //are 3 people listed, and red if there are more than 3 people listed.
 
-  //var waiter = req.params.username;
+  var waiterName = req.params.username;
+  var output = {};
 
-  res.render("home");
+  Waiter
+    .findOne({name : waiterName})
+    .populate("_shift")
+    .then(function(waiterDoc){
+      let currentWaiterShift = waiterDoc._shift;
+
+      for(let key in currentWaiterShift){
+        if(key.endsWith("day")){
+          let day = key;
+
+          if(currentWaiterShift[day] === true){
+            output[day] = "checked";
+          };
+        };
+      };
+      res.render("home", output);
+    });
 });
 
 //
@@ -318,7 +335,7 @@ function waitersAvailableForEachDay(waiterCollection){
               waiterWithShift(waiterName)
               .then(function(waiterWithShift){
                 updateShift(waiterWithShift, daysAvailable);
-                res.render("home");
+                res.redirect("/waiters/" + waiterName);
               });
           } else {
             res.render("home", {error: "No days were checked."})
@@ -352,7 +369,8 @@ app.get("/days", function(req, res){
 
   */
 });
+var port = app.get("port");
 
-app.listen(app.get("port"), function() {
-  console.log("The frontend server is running on port 5001!");
+app.listen(port, function() {
+  console.log("The frontend server is running on port : " + port);
 });

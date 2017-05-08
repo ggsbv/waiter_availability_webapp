@@ -4,16 +4,17 @@
     <table id="daysCheckboxTable">
     <thead>
       <tr>
-        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Monday">Monday</label></th>
-        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Tuesday">Tuesday</label></th>
-        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Wednesday">Wednesday</label></th>
-        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Thursday">Thursday</label></th>
-        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Friday">Friday</label></th>
-        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Saturday">Saturday</label></th>
-        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Sunday">Sunday</label></th>
+        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Monday" {{Monday}}>Monday</label></th>
+        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Tuesday" {{Tuesday}}>Tuesday</label></th>
+        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Wednesday" {{Wednesday}}>Wednesday</label></th>
+        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Thursday" {{Thursday}}>Thursday</label></th>
+        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Friday" {{Friday}}>Friday</label></th>
+        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Saturday" {{Saturday}}>Saturday</label></th>
+        <th class="checkboxCell"><label><input type="checkbox" name="dayCheck" value="Sunday" {{Sunday}}>Sunday</label></th>
       </tr>
     </thead>
   </table>
     <input class="buttonStyle" type="submit" name="submitDaysWorking" value="Submit">
   </form>
   <p>{{error}}</p>
+  <a href="/">Back to Log In Page</a>
