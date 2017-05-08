@@ -12,7 +12,7 @@ const bodyParser = require("body-parser");
 var app = express();
 
 //connect to mongodb
-mongoose.connect("mongodb://localhost/waiter_webapp");
+mongoose.connect("mongodb://ggsbv:waiter-availability@ds133271.mlab.com:33271/waiter-availability" || "mongodb://localhost/waiter_webapp");
 
 //create our mongo schemas and models
 var AvailableShift = mongoose.model("AvailableShift", {
