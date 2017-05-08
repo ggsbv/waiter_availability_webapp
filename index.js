@@ -26,7 +26,7 @@ var AvailableShift = mongoose.model("AvailableShift", {
   Thursday: Boolean,
   Friday: Boolean,
   Saturday: Boolean,
-  Sunday: Boolean,
+  Sunday: Boolean
 });
 
 var Waiter = mongoose.model("Waiter", {
@@ -371,6 +371,6 @@ app.get("/days", function(req, res){
 });
 var port = app.get("port");
 
-app.listen(port, function() {
+app.listen(port , function() {
   console.log("The frontend server is running on port : " + port);
 });
