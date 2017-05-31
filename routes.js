@@ -112,6 +112,10 @@ module.exports = function(models){
       var currentWaiterDoc = "";
       var daysAvailable = [];
 
+      //req.body.dayCheck returns either a String if a single day was checked,
+      //or an array of Strings if multiple days were checked. Therefore, we must
+      //remedy the edge case by checking its data type, and ensure that it is always
+      //an array containing strings for the following operations.
       if (typeof(wasChecked) !== "object") {
         daysAvailable.push(wasChecked);
       } else {

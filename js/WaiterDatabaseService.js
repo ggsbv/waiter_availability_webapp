@@ -1,5 +1,15 @@
 module.exports = function(){
 
+  //FUNCTION    : createWaiter
+  //PARAMETERS  : [1] username  => the waiter's name
+  //                # Type : String
+  //              [2] name      => the waiter's input password
+  //                # Type : String
+  //RETURN      : Type  => Object
+  //DESCRIPTION : Takes a waiter' name and password, then creates a document
+  //              in the Mongo Database for the waiter. An object containing
+  //              a success or error message is returned.
+
   const createWaiter = function(username, password){
 
     var newUser = new Waiter({
@@ -19,6 +29,15 @@ module.exports = function(){
       };
     });
   };
+
+  //FUNCTION    : createShift
+  //PARAMETERS  : [1] waiter  => MongoDB shiftless waiter document/object
+  //                # Type : Object
+  //RETURN      : Type  => Object
+  //DESCRIPTION : Takes a mongo waiter document, and creates a separate shift
+  //              document for that waiter. The shift document is then linked to
+  //              the waiter document.The function then returns a waiter document
+  //              that has a shift in the form of a promise.
 
   const createShift = function(waiter) {
     return AvailableShift
@@ -42,6 +61,21 @@ module.exports = function(){
         if (err) console.log(err);
       });
   };
+
+  //FUNCTION    : waiterWithShift
+  //PARAMETERS  : [1] waiterName  => name of the waiter we want to work with
+  //                # Type : String
+  //RETURN      : Type  => Object
+  //DESCRIPTION : Takes a waiter's name as an argument, and searches the Database
+  //              for the document that has the matching name.
+  //
+  //              If that waiter does have a shift, his/her shift is populated
+  //              and returned in the form of a promise.
+  //
+  //              Otherwise the waiter does not have a shift, a shift is
+  //              created using the createShift function, the waiter's shift is
+  //              then populated and the waiter is returned along with a populated
+  //              shift in the form of a promise.
 
   const waiterWithShift = function(waiterName) {
 
@@ -75,6 +109,21 @@ module.exports = function(){
       });
   };
 
+  //FUNCTION    : updateShift
+  //PARAMETERS  : [1] waiter    =>  a MongoDB waiter document
+  //                # Type : String
+  //              [2] shiftData =>  an array of day strings that were checked
+  //                                in the DOM checkbox element
+  //                # Type : Array
+  //RETURN      : Type  => Object
+  //DESCRIPTION : Takes a waiter document along with the days of the week on which
+  //              the waiter wants to work. The function then updates the waiter's
+  //              shift to "true" on the days which he/she has chosen to work, and
+  //              "false" for the days on which they did not choose to work.
+  //
+  //              The function finally returns a WriteResult object which contains
+  //              the status of the save() operation.
+
   const updateShift = function(waiter, shiftData) {
     var currentShift = waiter._shift;
 
@@ -95,12 +144,24 @@ module.exports = function(){
       }
       //since we have the boolean stored in workOnThisDay, we can set each weekDay
       //at currentShift to the value stored in workOnThisDay
-      currentShift[weekDay] = workOnThisDay; //shiftForWeekDay ? true : false;
+      currentShift[weekDay] = workOnThisDay;
 
     });
 
     return currentShift.save();
-  }
+  };
+
+  //FUNCTION    : waitersAvailableForEachDay
+  //PARAMETERS  : [1] waiterCollection  => an array of waiter documents
+  //                # Type : Array
+  //RETURN      : Type  => Object
+  //DESCRIPTION : Takes a collection of waiters, populates their shifts, then
+  //              checks each waiter's shifts. For the days which are set to "true",
+  //              the waiter's name is added to the corresponding day in the output
+  //              object.
+  //
+  //              The function finally returns an output object that shows all
+  //              the waiters that are working for each day of the week.
 
   const waitersAvailableForEachDay = function(waiterCollection){
     var output = {
@@ -144,6 +205,16 @@ module.exports = function(){
         return output;
       })
   };
+
+  //FUNCTION    : checkedDays
+  //PARAMETERS  : [1] waiterName  => a waiter's username
+  //                # Type : String
+  //RETURN      : Type  => Object
+  //DESCRIPTION : Takes a waiter's name as an argument, finds that waiter's
+  //              document in the database, then populates its shift. The function
+  //              the shift for the days which are set to true. Those days are set
+  //              as keys mapped to the value "checked" in the output object.
+  //              The output object is then returned.
 
   const checkedDays = function(waiterName){
     var output = {};
