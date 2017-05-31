@@ -1,4 +1,6 @@
-module.exports = function(){
+"use strict";
+
+module.exports = function(AvailableShift, Waiter){
 
   //FUNCTION    : createWaiter
   //PARAMETERS  : [1] username  => the waiter's name
@@ -11,6 +13,7 @@ module.exports = function(){
   //              a success or error message is returned.
 
   const createWaiter = function(username, password){
+    var status = {};
 
     var newUser = new Waiter({
       name: username,
@@ -18,11 +21,13 @@ module.exports = function(){
     });
 
     newUser.save()
-    .then(
+    .then(function(result){
       //make output display "Registration Complete"
-      return {
+      status = {
         output: "Registration complete."
-      })
+      };
+      return status;
+    })
     .catch(function(err) {
       return {
         output: err
@@ -214,12 +219,12 @@ module.exports = function(){
   //              document in the database, then populates its shift. The function
   //              the shift for the days which are set to true. Those days are set
   //              as keys mapped to the value "checked" in the output object.
-  //              The output object is then returned.
+  //              The output object is then returned in the form of a promise.
 
   const checkedDays = function(waiterName){
     var output = {};
 
-    Waiter
+    return Waiter
       .findOne({name : waiterName})
       .populate("_shift")
       .then(function(waiterDoc){

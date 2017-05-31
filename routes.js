@@ -4,10 +4,10 @@ const WaiterDatabaseService = require('./js/WaiterDatabaseService.js');
 
 module.exports = function(models){
 
-  AvailableShift = models.AvailableShift;
-  Waiter = models.Waiter;
+  var AvailableShift = models.AvailableShift;
+  var Waiter = models.Waiter;
 
-  var waiterDatabaseService = new WaiterDatabaseService();
+  var waiterDatabaseService = new WaiterDatabaseService(AvailableShift, Waiter);
 
   const loginGetReq = function(req, res){
     res.render("login");
@@ -55,7 +55,7 @@ module.exports = function(models){
         res.render("login", data);
       });
     };
-  });
+  };
 
   const regGetReq = function(req, res) {
     res.render("registration");
@@ -102,8 +102,11 @@ module.exports = function(models){
     //are 3 people listed, and red if there are more than 3 people listed.
 
     var waiterName = req.params.username;
-    var output = waiterDatabaseService.checkedDays(waiterName);
-    res.render("home", output);
+    waiterDatabaseService
+      .checkedDays(waiterName)
+      .then(function(daysChecked){
+        res.render("home", daysChecked);
+      })
   };
 
   const waiterPostReq = function(req, res) {

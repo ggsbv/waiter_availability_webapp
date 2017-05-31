@@ -39,19 +39,34 @@ app.use(bodyParser.json());
 //configure express-static
 app.use(serve("public"));
 
-//home/login page
+//GET /
+//show the login page
 app.get("/", router.loginGET);
 
+//POST /login
+//Attempt to log user in
 app.post("/login", router.loginPOST);
 
+//GET /registration
+//Registration page
 app.get("/registration", router.regGET);
 
+//POST /registration
+//Create a new waiter based on registration input details
 app.post("/registration", router.regPOST);
 
+//GET /waiters/:username
+//Display a checkbox for each day of the week so the waiter can choose
+//their shifts
 app.get("/waiters/:username", router.waiterGET);
 
+//POST /waiters/:username
+//Create a shift linked to the current waiter and save the state of the
+//days that have been checked
 app.post("/waiters/:username", router.waiterPOST);
 
+//GET /days
+//Show the admin which waiters are working on each day of the week
 app.get("/days", router.daysGET);
 
 var port = app.get("port");
