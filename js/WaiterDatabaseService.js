@@ -20,7 +20,7 @@ module.exports = function(AvailableShift, Waiter){
       password: password
     });
 
-    newUser.save()
+    return newUser.save()
     .then(function(result){
       //make output display "Registration Complete"
       status = {
