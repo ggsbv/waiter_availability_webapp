@@ -116,7 +116,7 @@ module.exports = function(AvailableShift, Waiter){
 
   //FUNCTION    : updateShift
   //PARAMETERS  : [1] waiter    =>  a MongoDB waiter document
-  //                # Type : String
+  //                # Type : Object
   //              [2] shiftData =>  an array of day strings that were checked
   //                                in the DOM checkbox element
   //                # Type : Array

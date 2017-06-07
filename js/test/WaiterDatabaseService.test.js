@@ -91,13 +91,56 @@ describe("The WaiterDatabaseService", function(){
   })
 
   //FUNCTION BEING TESTED:
-  //  => waiterWithShift(username, password)
+  //  => waiterWithShift(waiterName)
   it("should return a waiter with a populated shift", function(done){
-    
-  })
+    waiterDatabaseService
+      .waiterWithShift(testName)
+      .then(function(waiterWithShift){
+        assert.equal(false, waiterWithShift._shift.Monday);
+        assert.equal(false, waiterWithShift._shift.Tuesday);
+        assert.equal(false, waiterWithShift._shift.Wednesday);
+        assert.equal(false, waiterWithShift._shift.Thursday);
+        assert.equal(false, waiterWithShift._shift.Friday);
+        assert.equal(false, waiterWithShift._shift.Saturday);
+        assert.equal(false, waiterWithShift._shift.Sunday);
+        done();
+      })
+      .catch(function(err){
+        done(err);
+      })
+  });
 
+  //FUNCTION BEING TESTED:
+  //  => updateShift(waiter, shiftData)
+  it("should update a waiter's shift", function(done){
+    models.Waiter
+      .findOne({ name : testName })
+      .then(function(waiterDoc){
+        waiterDatabaseService
+          .updateShift(waiterDoc, ["Tuesday", "Friday"])
 
+          models.Waiter
+          .findOne({ name : testName })
+          .populate("_shift")
+          .then(function(waiterWithShift){
+            assert.equal(false, waiterWithShift._shift.Monday)
+            assert.equal(true, waiterWithShift._shift.Tuesday)
+            assert.equal(false, waiterWithShift._shift.Wednesday)
+            assert.equal(false, waiterWithShift._shift.Thursday)
+            assert.equal(true, waiterWithShift._shift.Friday)
+            assert.equal(false, waiterWithShift._shift.Saturday)
+            assert.equal(false, waiterWithShift._shift.Sunday)
+            done();
+          })
+          .catch(function(err){
+            done(err);
+          });
+      })
+      .catch(function(err){
+        done(err);
+      });
 
+  });
 
 
 
