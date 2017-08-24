@@ -18,7 +18,7 @@ on which they would prefer to work.
 http://waiter-availability-webapp.herokuapp.com 
 ```
 
-2.
+2. Log in or create an account.
 
   * If you don't have an account yet, create an account by clicking on the "Register" button. On the registration page, input
 your desired credentials. (For your manager's convenience, use your real name and surname as an account name)
@@ -45,7 +45,7 @@ Managers can use this data in order to assist them in making decisions that pert
 http://waiter-availability-webapp.herokuapp.com 
 ```
 
-2.
+2. Log in or register an admin account.
 
   * Log in using the username "admin", along with the designated admin password.
 
