@@ -146,3 +146,7 @@ table#legendTable td {
   border: solid white thin;
   margin: 3em 0em 1em 0em;
 }
+
+#regComplete {
+  display: block;
+}
