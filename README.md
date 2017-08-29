@@ -79,8 +79,43 @@ Want to contribute to and/or extend the application? Then this section's for you
   * Express Static
   * Body Parser
 
-5. To run tests, you will need to install [Mocha.](https://mochajs.org/#installation). This will allow you to run the ` mocha `
+5. To run tests, you will need to install [Mocha](https://mochajs.org/#installation). This will allow you to run the ` mocha `
 command in the terminal in order to run your unit tests.
 
 6. Run ``` npm install nodemon ``` to install nodemon. This will allow you to run the express server by using the command 
 ` nodemon ` in your terminal while in the project's root.
+
+## Using MongoDB
+
+### Start the Mongo shell
+
+The following steps will allow you to get your Mongo client shell running.
+
+1. Install [MongoDB](https://docs.mongodb.com/manual/administration/install-community/).
+
+2. Run the ` mongod ` command in your terminal to start the Mongo DB process/service.
+
+3. Start the Mongo client. You can do this by running ` mongo ` in the terminal.
+
+4. You can now interact with your databases using the Mongo shell.
+
+### Tinkering with MongoDB
+
+One of the best ways to learn a new technology is to tinker with it. Now that your mongo shell is running, you'll
+be querying in no time!
+
+1. Check your databases by running ` show dbs ` in the Mongo shell. You should see the database that has been created
+by the Waiter Web App if you have run the server before.
+
+2. To use this project's database, you can run ` use waiter_webapp `
+
+3. You can now view any collections in the database. If you're from the SQL world, collections are kind of like tables. Not identical, but similar...
+
+For the Waiter WebApp, you will notice that there are two collections - Available Shifts and Waiters.
+
+4. Now that you know the collection names, you can start querying!
+
+ * Want to see all the waiter data? Run ` db.waiters.find({}) `
+ * Want to remove all the waiter data? Run ` db.waiters.remove({}) `
+ 
+5. You can read more information about Mongo queries [here](https://docs.mongodb.com/).
