@@ -14,16 +14,16 @@ on which they would prefer to work.
 
 1. Go to the application's landing page:
 
-``` 
-http://waiter-availability-webapp.herokuapp.com 
-```
+    ``` 
+    http://waiter-availability-webapp.herokuapp.com 
+    ```
 
 2. Log in or create an account.
 
-  * If you don't have an account yet, create an account by clicking on the "Register" button. On the registration page, input
+    * If you don't have an account yet, create an account by clicking on the "Register" button. On the registration page, input
 your desired credentials. (For your manager's convenience, use your real name and surname as an account name)
 
-  * If you do have an account, use your credentials to log in.
+    * If you do have an account, use your credentials to log in.
 
 3. Check the boxes for the days on which you would prefer to work for the week.
 
@@ -41,15 +41,15 @@ Managers can use this data in order to assist them in making decisions that pert
 
 1. Go to the application's landing page:
 
-``` 
-http://waiter-availability-webapp.herokuapp.com 
-```
+    ``` 
+    http://waiter-availability-webapp.herokuapp.com 
+    ```
 
 2. Log in or register an admin account.
 
-  * Log in using the username "admin", along with the designated admin password.
+    * Log in using the username "admin", along with the designated admin password.
 
-  * If an admin account has not yet been created, click on the "Register" button in order to create an account. The account username must be "admin" in order to access the manager dashboard. The password can be anything.
+    * If an admin account has not yet been created, click on the "Register" button in order to create an account. The account username must be "admin" in order to access the manager dashboard. The password can be anything.
 
 3. View your waiters' shifts.
 
@@ -72,12 +72,12 @@ Want to contribute to and/or extend the application? Then this section's for you
 
 4. Run ``` npm install ``` in the project root. This will install all dependencies that are included in the package.json.
 
-  Tools that are included in this app are:
-  * Mongoose
-  * ExpressJS
-  * Express Handlebars
-  * Express Static
-  * Body Parser
+    Tools that are included in this app are:
+    * Mongoose
+    * ExpressJS
+    * Express Handlebars
+    * Express Static
+    * Body Parser
 
 5. To run tests, you will need to install [Mocha](https://mochajs.org/#installation). This will allow you to run the ` mocha `
 command in the terminal in order to run your unit tests.
@@ -111,18 +111,55 @@ by the Waiter Web App if you have run the server before.
 
 3. You can now view any collections in the database. If you're from the SQL world, collections are kind of like tables. Not identical, but similar...
 
-For the Waiter WebApp, you will notice that there are two collections - Available Shifts and Waiters.
+    For the Waiter WebApp, you will notice that there are two collections - Available Shifts and Waiters.
 
 4. Now that you know the collection names, you can start querying!
 
- * Want to see all the waiter data? Run ` db.waiters.find({}) `
- * Want to remove all the waiter data? Run ` db.waiters.remove({}) `
+    * Want to see all the waiter data? Run ` db.waiters.find({}) `
+    * Want to remove all the waiter data? Run ` db.waiters.remove({}) `
  
 5. You can read more information about Mongo queries [here](https://docs.mongodb.com/).
 
-### Travis CI
+## Travis CI
 
 This project makes use of the continuous integration tool [Travis CI](travis-ci.org).
 
-Travis will automatically run all unit tests in this project. You only need to make sure
-that all your unit tests are inside the ` test ` folder in the project root. 
+### Prerequisites
+
+In order for Travis to work, you need to make sure:
+1. That ` mocha ` is a development dependency in your ` package.json `. If it isn't, add it by running
+` npm install mocha --save-dev ` in the terminal.
+
+2. That running ` npm test ` executes your mocha tests. If it doesn't, add the following to your
+` package.json `'s ` script ` section:
+
+    ```
+      "scripts": {
+        "test": "node_modules/.bin/mocha"
+      }
+    ```
+    
+### Setting Up Travis
+
+Travis will automatically run all unit tests in this project. Here is how you set it up:
+
+1. Sign up to [Travis CI](travis-ci.org) using your GitHub account.
+
+2. Create a ` .travis.yml ` in your project root. This project already contains this file,
+so you won't need to create it.
+
+3. In your ` .travis.yml `, specify your "language" as "node_js", as well as your node version, as 
+follows:
+
+    ```
+    language: node_js
+    node_js:
+        - "v4.2.6"
+    ```
+    
+4. Commit and push your code to GitHub.
+
+5. Navigate to [Travis CI](travis-ci.org), and sign in if necessary.
+
+6. You should now be able to see the results of your unit tests by navigating to the desired
+repository.
