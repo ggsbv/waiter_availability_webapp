@@ -119,3 +119,10 @@ For the Waiter WebApp, you will notice that there are two collections - Availabl
  * Want to remove all the waiter data? Run ` db.waiters.remove({}) `
  
 5. You can read more information about Mongo queries [here](https://docs.mongodb.com/).
+
+### Travis CI
+
+This project makes use of the continuous integration tool [Travis CI](travis-ci.org).
+
+Travis will automatically run all unit tests in this project. You only need to make sure
+that all your unit tests are inside the ` test ` folder in the project root. 
