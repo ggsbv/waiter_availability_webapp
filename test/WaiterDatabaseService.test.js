@@ -1,7 +1,7 @@
 "use strict";
 
 //url of test database
-var mongoUrl = "mongodb://localhost/waiter-webapp-testdb";
+var mongoUrl = "mongodb://testing:testing@ds111124.mlab.com:11124/waiter-availability-webapp-testing";
 
 //import packages
 const assert = require('assert');

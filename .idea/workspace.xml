@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5a2863bf-6f2e-420f-ac2e-0c0f5b44082b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/WaiterDatabaseService.test.js" afterPath="$PROJECT_DIR$/test/WaiterDatabaseService.test.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,15 +19,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="626">
-                <caret line="127" column="76" lean-forward="false" selection-start-line="127" selection-start-column="76" selection-end-line="127" selection-end-column="76" />
-                <folding />
-              </first_editor>
-              <second_editor />
+      <file leaf-file-name="WaiterDatabaseService.test.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/WaiterDatabaseService.test.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="87">
+              <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -44,8 +40,8 @@
         <option value="$PROJECT_DIR$/js/test/WaiterDatabaseService.test.js" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/test/WaiterDatabaseService.test.js" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/test/WaiterDatabaseService.test.js" />
       </list>
     </option>
   </component>
@@ -141,12 +137,12 @@
       <workItem from="1504079289857" duration="1208000" />
       <workItem from="1504080616863" duration="260000" />
       <workItem from="1504080976551" duration="578000" />
-      <workItem from="1504081749104" duration="530000" />
+      <workItem from="1504081749104" duration="750000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2679000" />
+    <option name="totallyTimeSpent" value="2899000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
@@ -187,37 +183,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
           <caret line="10" column="45" lean-forward="false" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
-          <folding>
-            <marker date="1504081458000" expanded="true" signature="468:4398" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="494:832" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="575:771" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="661:694" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="726:762" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="799:827" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="910:974" ph="//..." />
-            <marker date="1504081458000" expanded="true" signature="1029:1503" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="1129:1441" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="1224:1363" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="1395:1431" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="1469:1497" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="1509:1574" ph="//..." />
-            <marker date="1504081458000" expanded="true" signature="1650:2381" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="1735:2319" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="1832:2242" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="2274:2310" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="2347:2375" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="2386:2447" ph="//..." />
-            <marker date="1504081458000" expanded="true" signature="2516:3128" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="2614:3067" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="3095:3123" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="3134:3198" ph="//..." />
-            <marker date="1504081458000" expanded="true" signature="3252:4394" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="3367:4331" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="3486:4322" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="3655:4214" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="4254:4306" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="4359:4387" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -258,44 +224,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/WaiterDatabaseService.test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="10" column="45" lean-forward="false" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
-          <folding>
-            <marker date="1504081458000" expanded="true" signature="468:4398" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="494:832" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="575:771" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="661:694" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="726:762" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="799:827" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="910:974" ph="//..." />
-            <marker date="1504081458000" expanded="true" signature="1029:1503" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="1129:1441" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="1224:1363" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="1395:1431" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="1469:1497" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="1509:1574" ph="//..." />
-            <marker date="1504081458000" expanded="true" signature="1650:2381" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="1735:2319" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="1832:2242" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="2274:2310" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="2347:2375" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="2386:2447" ph="//..." />
-            <marker date="1504081458000" expanded="true" signature="2516:3128" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="2614:3067" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="3095:3123" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="3134:3198" ph="//..." />
-            <marker date="1504081458000" expanded="true" signature="3252:4394" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="3367:4331" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="3486:4322" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="3655:4214" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="4254:4306" ph="{...}" />
-            <marker date="1504081458000" expanded="true" signature="4359:4387" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -304,6 +232,14 @@
             <folding />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/WaiterDatabaseService.test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
